@@ -41,4 +41,14 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ReactionActivity.class);
         startActivity(intent);
     }
+
+    public void navigate_to_game_show(View view) {
+        Intent intent = new Intent(this, GameShowActivity.class);
+        startActivity(intent);
+    }
+
+    public void navigate_to_statistics(View view) {
+        Intent intent = new Intent(this, StatisticsActivity.class);
+        startActivity(intent);
+    }
 }
