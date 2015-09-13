@@ -3,4 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="reaction_tester_button_text">Reaction Mode</string>
+    <string name="gameshow_mode_button_text">Gameshow Mode</string>
+    <string name="statistics_button_text">Statistics</string>
 </resources>
