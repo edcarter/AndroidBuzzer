@@ -7,17 +7,29 @@ import java.util.concurrent.Callable;
  */
 public class ReactionTimer {
 
+    private Timer timer;
+
+    public ReactionTimer(){
+        timer = new Timer();
+    }
+
     public void Start(Callable reactionTriggeredCallback) throws Exception {
         int minWaitTime = GetMinWaitTimeMs();
         int maxWaitTime = GetMaxWaitTimeMs();
+
+        timer.Start();
         WaitForIndeterminateTime(minWaitTime, maxWaitTime);
-
-
         reactionTriggeredCallback.call();
     }
 
     public void Stop() {
+        timer.Stop();
+    }
 
+    public int GetReactionTimeMs(){
+        long reactionTimeNs = timer.GetDurationNs();
+        long msPerNs = 1000000;
+        return (int)(reactionTimeNs / msPerNs);
     }
 
     //Return the minimum time to wait before triggering the reaction
