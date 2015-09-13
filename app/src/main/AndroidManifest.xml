@@ -16,6 +16,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ReactionActivity"
+            android:label="@string/title_activity_reaction"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.elias.androidbuzzer.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".GameShowActivity"
+            android:label="@string/title_activity_game_show"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.elias.androidbuzzer.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".StatisticsActivity"
+            android:label="@string/title_activity_statistics"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.elias.androidbuzzer.MenuActivity" />
+        </activity>
     </application>
 
 </manifest>
