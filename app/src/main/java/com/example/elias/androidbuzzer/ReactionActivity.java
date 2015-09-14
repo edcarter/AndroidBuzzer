@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.concurrent.Callable;
+
 public class ReactionActivity extends AppCompatActivity {
 
     ReactionTimer reactionTimer;
@@ -39,7 +41,21 @@ public class ReactionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void reaction_button_clicked(View view) {
+    public void reaction_button_clicked(View view) throws Exception {
+        Callable reaction_timer_callback = new Callable(){
+            public Object call(){
+                reaction_timer_triggered();
+                return null;
+            }
+        };
+        reactionTimer.Start(reaction_timer_callback);
+    }
+
+    private void reaction_timer_triggered(){
+        change_button_to_triggered();
+    }
+
+    private void change_button_to_triggered(){
 
     }
 }
