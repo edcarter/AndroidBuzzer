@@ -27,9 +27,9 @@ public class Timer {
 
     public long GetDurationNs(){
         if (IsRunning()){
-            return startTime - System.nanoTime();
+            return System.nanoTime() - startTime;
         } else {
-            return startTime - stopTime;
+            return stopTime - startTime;
         }
     }
 

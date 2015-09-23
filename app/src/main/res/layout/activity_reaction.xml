@@ -18,5 +18,5 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:nestedScrollingEnabled="false"
-        android:onClick="reaction_button_clicked" />
+        android:onClick="reactionButtonClicked" />
 </RelativeLayout>

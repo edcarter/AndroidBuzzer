@@ -1,19 +1,21 @@
 package com.example.elias.androidbuzzer;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import java.util.concurrent.Callable;
 
 public class ReactionActivity extends AppCompatActivity {
 
     ReactionTimer reactionTimer;
+    Boolean timerRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +47,59 @@ public class ReactionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void reaction_button_clicked(View view) throws Exception {
-        Callable reaction_timer_callback = new Callable(){
+    public void reactionButtonClicked(View view) throws Exception {
+        if (timerRunning){
+            Integer reactionTime = stopReactionTimer();
+            changeButtonToUnTriggered();
+            displayReactionTime(reactionTime);
+        } else {
+            startReactionTimer();
+            changeButtonToTriggered();
+        }
+    }
+
+    private void displayReactionTime(Integer timeMs) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(timeMs.toString() + "Ms").setTitle("Reaction Time:");
+        builder.setPositiveButton(R.string.reaction_rules_dialog_ok_button,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog rulesDialog = builder.create();
+        rulesDialog.show();
+    }
+
+    private Integer stopReactionTimer() {
+        reactionTimer.Stop();
+        timerRunning = false;
+        return reactionTimer.GetReactionTimeMs();
+    }
+
+    private void startReactionTimer() throws Exception {
+        Callable reactionTimerCallback = new Callable(){
             public Object call(){
-                reaction_timer_triggered();
+                reactionTimerTriggered();
                 return null;
             }
         };
-        reactionTimer.Start(reaction_timer_callback);
+        reactionTimer.Start(reactionTimerCallback);
+        timerRunning = true;
     }
 
-    private void reaction_timer_triggered(){
-        change_button_to_triggered();
+    private void reactionTimerTriggered(){
+        changeButtonToTriggered();
     }
 
-    private void change_button_to_triggered(){
+    private void changeButtonToTriggered(){
+        Button reactionButton = (Button)findViewById(R.id.button4);
+        reactionButton.setBackgroundColor(Color.RED);
+    }
 
+    private void changeButtonToUnTriggered(){
+        Button reactionButton = (Button)findViewById(R.id.button4);
+        reactionButton.setBackgroundColor(Color.LTGRAY);
     }
 
     private void notifyRules(){

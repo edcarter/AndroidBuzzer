@@ -16,9 +16,8 @@ public class ReactionTimer {
     public void Start(Callable reactionTriggeredCallback) throws Exception {
         int minWaitTime = GetMinWaitTimeMs();
         int maxWaitTime = GetMaxWaitTimeMs();
-
-        timer.Start();
         WaitForIndeterminateTime(minWaitTime, maxWaitTime);
+        timer.Start();
         reactionTriggeredCallback.call();
     }
 
