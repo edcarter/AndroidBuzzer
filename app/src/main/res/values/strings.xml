@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">AndroidBuzzer</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="reaction_tester_button_text">REACTION MODE</string>
@@ -10,4 +9,7 @@
     <string name="title_activity_game_show">GameShowActivity</string>
     <string name="title_activity_statistics">StatisticsActivity</string>
     <string name="reaction_button_stopped_text">Start Test</string>
+    <string name="reaction_rules_dialog_message">ReplaceMe.....</string>
+    <string name="reaction_rules_dialog_title">Rules</string>
+    <string name="reaction_rules_dialog_ok_button">OK!</string>
 </resources>

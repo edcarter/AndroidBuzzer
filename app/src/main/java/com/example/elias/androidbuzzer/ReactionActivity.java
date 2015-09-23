@@ -1,5 +1,8 @@
 package com.example.elias.androidbuzzer;
 
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +19,7 @@ public class ReactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reaction);
+        notifyRules();
         reactionTimer = new ReactionTimer();
     }
 
@@ -57,5 +61,18 @@ public class ReactionActivity extends AppCompatActivity {
 
     private void change_button_to_triggered(){
 
+    }
+
+    private void notifyRules(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.reaction_rules_dialog_message).setTitle(R.string.reaction_rules_dialog_title);
+        builder.setPositiveButton(R.string.reaction_rules_dialog_ok_button,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog rulesDialog = builder.create();
+        rulesDialog.show();
     }
 }
