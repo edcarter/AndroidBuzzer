@@ -50,11 +50,11 @@ public class ReactionActivity extends AppCompatActivity {
     public void reactionButtonClicked(View view) throws Exception {
         if (timerRunning){
             Integer reactionTime = stopReactionTimer();
-            changeButtonToUnTriggered();
+            changeButtonToNotTiming();
             displayReactionTime(reactionTime);
         } else {
             startReactionTimer();
-            changeButtonToTriggered();
+            changeButtonToWaiting();
         }
     }
 
@@ -84,20 +84,25 @@ public class ReactionActivity extends AppCompatActivity {
                 return null;
             }
         };
-        reactionTimer.Start(reactionTimerCallback);
+        reactionTimer.Start(reactionTimerCallback, this);
         timerRunning = true;
     }
 
     private void reactionTimerTriggered(){
-        changeButtonToTriggered();
+        changeButtonToReacted();
     }
 
-    private void changeButtonToTriggered(){
+    private void changeButtonToReacted(){
         Button reactionButton = (Button)findViewById(R.id.button4);
         reactionButton.setBackgroundColor(Color.RED);
     }
 
-    private void changeButtonToUnTriggered(){
+    private void changeButtonToWaiting(){
+        Button reactionButton = (Button)findViewById(R.id.button4);
+        reactionButton.setBackgroundColor(Color.GREEN);
+    }
+
+    private void changeButtonToNotTiming(){
         Button reactionButton = (Button)findViewById(R.id.button4);
         reactionButton.setBackgroundColor(Color.LTGRAY);
     }
