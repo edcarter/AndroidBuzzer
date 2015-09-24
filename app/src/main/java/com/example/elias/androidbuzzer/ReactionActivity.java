@@ -16,6 +16,7 @@ public class ReactionActivity extends AppCompatActivity {
 
     ReactionTimer reactionTimer;
     Boolean timerRunning = false;
+    Boolean waitingForUserReaction = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class ReactionActivity extends AppCompatActivity {
         notifyRules();
         reactionTimer = new ReactionTimer();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,14 +50,32 @@ public class ReactionActivity extends AppCompatActivity {
     }
 
     public void reactionButtonClicked(View view) throws Exception {
-        if (timerRunning){
+        if (timerRunning && waitingForUserReaction){
             Integer reactionTime = stopReactionTimer();
             changeButtonToNotTiming();
             displayReactionTime(reactionTime);
+        } else if (timerRunning) {
+            //user hit too early
+            reactionTimer = new ReactionTimer();
+            diplayTooEarlyDialog();
+            changeButtonToNotTiming();
         } else {
             startReactionTimer();
-            changeButtonToWaiting();
+            changeButtontToWaitingForUser();
         }
+    }
+
+    private void diplayTooEarlyDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("You hit the button to early!!! Try again.").setTitle("Dont Do That!");
+        builder.setPositiveButton(R.string.reaction_rules_dialog_ok_button,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog rulesDialog = builder.create();
+        rulesDialog.show();
     }
 
     private void displayReactionTime(Integer timeMs) {
@@ -74,6 +94,7 @@ public class ReactionActivity extends AppCompatActivity {
     private Integer stopReactionTimer() {
         reactionTimer.Stop();
         timerRunning = false;
+        waitingForUserReaction = false;
         return reactionTimer.GetReactionTimeMs();
     }
 
@@ -81,6 +102,7 @@ public class ReactionActivity extends AppCompatActivity {
         Callable reactionTimerCallback = new Callable(){
             public Object call(){
                 reactionTimerTriggered();
+                waitingForUserReaction = true;
                 return null;
             }
         };
@@ -89,15 +111,15 @@ public class ReactionActivity extends AppCompatActivity {
     }
 
     private void reactionTimerTriggered(){
-        changeButtonToReacted();
+        changeButtonToHitByUser();
     }
 
-    private void changeButtonToReacted(){
+    private void changeButtonToHitByUser() {
         Button reactionButton = (Button)findViewById(R.id.button4);
         reactionButton.setBackgroundColor(Color.RED);
     }
 
-    private void changeButtonToWaiting(){
+    private void changeButtontToWaitingForUser(){
         Button reactionButton = (Button)findViewById(R.id.button4);
         reactionButton.setBackgroundColor(Color.GREEN);
     }

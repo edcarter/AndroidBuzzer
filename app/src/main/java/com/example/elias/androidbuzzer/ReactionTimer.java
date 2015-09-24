@@ -6,7 +6,6 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,15 +24,17 @@ public class ReactionTimer {
         final int minWaitTime = GetMinWaitTimeMs();
         final int maxWaitTime = GetMaxWaitTimeMs();
 
-        //yo dawg, I heard you like inner classes
+        //yo dawg, I heard you like inner classes... really wish I had lambdas
         //This is used to run a task in the background and then dispatch to the main UI thread
         Runnable r = new Runnable() {
             public void run() {
                 WaitForIndeterminateTime(minWaitTime, maxWaitTime);
+                    //Rawkode, http://stackoverflow.com/questions/13746940/android-calling-ui-thread-from-worker-thread
                     activity.runOnUiThread(new Runnable() {
                         public void run() {
                             try {
                                 reactionTriggeredCallback.call();
+                                timer.Start();
                             } catch (Exception ex){
                                 throw new RuntimeException(ex);
                             }
@@ -43,7 +44,6 @@ public class ReactionTimer {
         };
         ExecutorService executor = Executors.newCachedThreadPool();
         executor.submit(r);
-        timer.Start();
     }
 
     public void Stop() {
