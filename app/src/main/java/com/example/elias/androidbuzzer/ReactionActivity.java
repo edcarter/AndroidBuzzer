@@ -3,6 +3,7 @@ package com.example.elias.androidbuzzer;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,13 +15,15 @@ import java.util.concurrent.Callable;
 
 public class ReactionActivity extends AppCompatActivity {
 
-    ReactionTimer reactionTimer;
-    Boolean timerRunning = false;
-    Boolean waitingForUserReaction = false;
+    private ReactionTimer reactionTimer;
+    private Boolean timerRunning = false;
+    private Boolean waitingForUserReaction = false;
+    MediaPlayer hitMarkerPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hitMarkerPlayer = MediaPlayer.create(this, R.raw.hitmarker);
         setContentView(R.layout.activity_reaction);
         notifyRules();
         reactionTimer = new ReactionTimer();
@@ -51,11 +54,14 @@ public class ReactionActivity extends AppCompatActivity {
 
     public void reactionButtonClicked(View view) throws Exception {
         if (timerRunning && waitingForUserReaction){
+            hitMarkerPlayer.start();
             Integer reactionTime = stopReactionTimer();
             changeButtonToNotTiming();
             displayReactionTime(reactionTime);
         } else if (timerRunning) {
             //user hit too early
+            stopReactionTimer();
+            reactionTimer.Cancel();
             reactionTimer = new ReactionTimer();
             diplayTooEarlyDialog();
             changeButtonToNotTiming();
@@ -101,8 +107,10 @@ public class ReactionActivity extends AppCompatActivity {
     private void startReactionTimer() throws Exception {
         Callable reactionTimerCallback = new Callable(){
             public Object call(){
-                reactionTimerTriggered();
-                waitingForUserReaction = true;
+                if (timerRunning){
+                    reactionTimerTriggered();
+                    waitingForUserReaction = true;
+                }
                 return null;
             }
         };
@@ -110,8 +118,9 @@ public class ReactionActivity extends AppCompatActivity {
         timerRunning = true;
     }
 
+
     private void reactionTimerTriggered(){
-        changeButtonToHitByUser();
+         if (timerRunning) changeButtonToHitByUser();
     }
 
     private void changeButtonToHitByUser() {

@@ -15,9 +15,14 @@ public class ReactionTimer {
 
     private Timer timer;
     private Random rand = new Random();
+    private boolean cancelled = false;
 
-    public ReactionTimer(){
+    public ReactionTimer() {
         timer = new Timer();
+    }
+
+    public void Cancel() {
+        cancelled = true;
     }
 
     public void Start(final Callable reactionTriggeredCallback, final Activity activity) throws Exception {
@@ -29,17 +34,18 @@ public class ReactionTimer {
         Runnable r = new Runnable() {
             public void run() {
                 WaitForIndeterminateTime(minWaitTime, maxWaitTime);
-                    //Rawkode, http://stackoverflow.com/questions/13746940/android-calling-ui-thread-from-worker-thread
-                    activity.runOnUiThread(new Runnable() {
-                        public void run() {
-                            try {
-                                reactionTriggeredCallback.call();
-                                timer.Start();
-                            } catch (Exception ex){
-                                throw new RuntimeException(ex);
-                            }
+                if (cancelled) return;
+                //Rawkode, http://stackoverflow.com/questions/13746940/android-calling-ui-thread-from-worker-thread
+                activity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        try {
+                            reactionTriggeredCallback.call();
+                            timer.Start();
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
                         }
-                    });
+                    }
+                });
             }
         };
         ExecutorService executor = Executors.newCachedThreadPool();
@@ -50,29 +56,29 @@ public class ReactionTimer {
         timer.Stop();
     }
 
-    public int GetReactionTimeMs(){
+    public int GetReactionTimeMs() {
         long reactionTimeNs = timer.GetDurationNs();
         long msPerNs = 1000000;
-        return (int)(reactionTimeNs / msPerNs);
+        return (int) (reactionTimeNs / msPerNs);
     }
 
     //Return the minimum time to wait before triggering the reaction
     //Overload this to change the minimum wait time
-    private int GetMinWaitTimeMs(){
+    private int GetMinWaitTimeMs() {
         return 20;
     }
 
     //Return the maximum time to wait before triggering the reaction
     //Overload this to change the maximum wait time
-    private int GetMaxWaitTimeMs(){
+    private int GetMaxWaitTimeMs() {
         return 2000;
     }
 
-    private void WaitForIndeterminateTime(int minWaitMs, int maxWaitMs){
+    private void WaitForIndeterminateTime(int minWaitMs, int maxWaitMs) {
         Integer randomSleepTime = randInt(minWaitMs, maxWaitMs);
         try {
             TimeUnit.MILLISECONDS.sleep(randomSleepTime);
-        } catch (InterruptedException ex){
+        } catch (InterruptedException ex) {
             throw new RuntimeException(ex);
         }
     }
