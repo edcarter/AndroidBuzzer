@@ -59,6 +59,7 @@ public class ReactionActivity extends AppCompatActivity {
     }
 
     public void reactionButtonClicked(View view) throws Exception {
+        //TODO(refactor button click handler for different states)
         if (timerRunning && waitingForUserReaction){
             hitMarkerPlayer.start();
             Integer reactionTime = stopReactionTimer();

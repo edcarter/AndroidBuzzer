@@ -40,6 +40,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.elias.androidbuzzer.MenuActivity" />
         </activity>
+        <activity
+            android:name=".PlayerSelectionActivity"
+            android:label="@string/title_activity_player_selection"
+            android:parentActivityName=".MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.elias.androidbuzzer.MenuActivity" />
+        </activity>
     </application>
 
 </manifest>
