@@ -12,6 +12,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/spacer1"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/select_player_text"
         android:id="@+id/textView"
@@ -20,25 +26,26 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spacer"
+        android:id="@+id/spacer2"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.7" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@android:dimen/app_icon_size"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/players_selected"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.1" />
 
     <SeekBar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:id="@+id/player_selecter_bar"
-        android:layout_weight="0.3"
-        android:focusable="true" />
+        android:focusable="true"
+        android:progress="0"
+        android:maxHeight="60dp"
+        android:minHeight="60dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -46,6 +53,13 @@
         android:text="@string/player_selector_play_button"
         android:id="@+id/player_selector_play_button"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.1" />
+        android:layout_weight="0.1"
+        android:onClick="navigate_to_gameshow"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spacer3"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

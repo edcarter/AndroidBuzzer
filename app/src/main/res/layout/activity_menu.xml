@@ -28,7 +28,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/button"
         android:layout_alignEnd="@+id/button"
-        android:onClick="navigate_to_game_show"/>
+        android:onClick="navigate_to_player_selector"/>
 
     <Button
         android:layout_width="wrap_content"

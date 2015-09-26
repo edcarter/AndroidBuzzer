@@ -27,10 +27,10 @@
         <activity
             android:name=".GameShowActivity"
             android:label="@string/title_activity_game_show"
-            android:parentActivityName=".MenuActivity" >
+            android:parentActivityName=".PlayerSelectionActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.elias.androidbuzzer.MenuActivity" />
+                android:value="com.example.elias.androidbuzzer.PlayerSelectionActivity" />
         </activity>
         <activity
             android:name=".StatisticsActivity"

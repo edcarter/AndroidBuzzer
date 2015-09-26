@@ -42,7 +42,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void navigate_to_game_show(View view) {
+    public void navigate_to_player_selector(View view) {
         Intent intent = new Intent(this, PlayerSelectionActivity.class);
         startActivity(intent);
     }

@@ -1,5 +1,6 @@
 package com.example.elias.androidbuzzer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,10 +8,14 @@ import android.view.MenuItem;
 
 public class GameShowActivity extends AppCompatActivity {
 
+    private Integer playersSelected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_show);
+        Intent intent = getIntent();
+        playersSelected = intent.getIntExtra(PlayerSelectionActivity.playersSelectedExtra, 2);
     }
 
     @Override
