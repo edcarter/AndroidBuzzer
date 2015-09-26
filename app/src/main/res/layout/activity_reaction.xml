@@ -20,4 +20,5 @@
         android:nestedScrollingEnabled="false"
         android:onClick="reactionButtonClicked"
         android:background="#BBBB" />
+
 </RelativeLayout>
