@@ -1,5 +1,7 @@
 package com.example.elias.androidbuzzer;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
@@ -14,6 +18,7 @@ import java.util.Stack;
 public class StatisticsActivity extends AppCompatActivity {
 
     private StatisticsModel model;
+    private ArrayList<String> statistics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +30,12 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private void populateListView(StatisticsModel model) {
         ListView listView = (ListView) findViewById(R.id.statistics_list_view);
-        ArrayList<String> statistics = new ArrayList<>();
+        statistics = new ArrayList<>();
         statistics.addAll(formatSinglePlayerStats(model));
         statistics.addAll(formatTwoPlayerStats(model));
         statistics.addAll(formatThreePlayerStats(model));
         statistics.addAll(formatFourPlayerStats(model));
         ArrayAdapter<String> statisticsArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, statistics);
-
-        //http://blog.denevell.org/android-SimpleExpandableListAdapter-example.html
         listView.setAdapter(statisticsArrayAdapter);
     }
 
@@ -236,5 +239,41 @@ public class StatisticsActivity extends AppCompatActivity {
     public void clear_statistics(View view) {
         StatisticsEngine.ClearStatisticsModel(this);
         populateListView(StatisticsEngine.GetStatisticsModel(this));
+    }
+
+    public void email_statistics(View view) {
+        String[] emails = {"your email here!"};
+        String subject = "Android Buzzer Statistics";
+        String messageBody = emailStatisticsFormat(statistics);
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, emails);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, messageBody);
+
+        // need this to prompts email client only
+        emailIntent.setType("message/rfc822");
+
+        try {
+            startActivity(emailIntent);
+        } catch (RuntimeException ex){
+            notifyNoEmailHandler();
+        }
+    }
+
+    private String emailStatisticsFormat(ArrayList<String> statistics){
+        String formatted = "";
+        for (String s : statistics){
+            formatted += s + "\n";
+        }
+        return formatted;
+    }
+
+    private void notifyNoEmailHandler(){
+        CharSequence text = "You Don't Have An Email App Set Up. Sign Into The Email App Or Download An Email App";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(this, text, duration);
+        toast.show();
     }
 }

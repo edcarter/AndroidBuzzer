@@ -26,7 +26,8 @@
             android:layout_height="match_parent"
             android:text="@string/email_stats_button_text"
             android:id="@+id/email_stats_button"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            android:onClick="email_statistics"/>
 
         <Button
             android:layout_width="wrap_content"
