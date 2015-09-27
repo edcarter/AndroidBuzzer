@@ -8,9 +8,9 @@
     <string name="title_activity_reaction">ReactionActivity</string>
     <string name="title_activity_game_show">GameShowActivity</string>
     <string name="title_activity_statistics">StatisticsActivity</string>
-    <string name="reaction_button_stopped_text">Start Test</string>
-    <string name="reaction_rules_dialog_message">ReplaceMe.....</string>
-    <string name="reaction_rules_dialog_title">Rules</string>
+    <string name="reaction_button_stopped_text">START!</string>
+    <string name="reaction_rules_dialog_message">Hit The Grey Button To Start!\nWait For The Screen To Turn From Red To Green Then Hit The Button!</string>
+    <string name="reaction_rules_dialog_title">Instructions</string>
     <string name="reaction_rules_dialog_ok_button">OK!</string>
     <string name="title_activity_player_selection">PlayerSelectionActivity</string>
     <string name="select_player_text">Select Number Of Players!</string>

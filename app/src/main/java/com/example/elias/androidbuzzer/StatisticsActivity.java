@@ -84,14 +84,14 @@ public class StatisticsActivity extends AppCompatActivity {
     private String emailStatisticsFormat(ArrayList<String> statistics){
         String formatted = "";
         for (String s : statistics){
-            formatted += s + "\n";
+            formatted += s + "\n\n";
         }
         if (formatted == "") formatted = "No Statistics Yet!";
         return formatted;
     }
 
     private void notifyNoEmailHandler(){
-        CharSequence text = "You Don't Have An Email App Set Up. Sign Into The Email App Or Download An Email App";
+        CharSequence text = "You Don't Have An Email App Set Up! Sign Into Or Install The Email App.";
         int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(this, text, duration);

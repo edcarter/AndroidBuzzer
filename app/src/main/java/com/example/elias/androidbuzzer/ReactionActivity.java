@@ -134,16 +134,19 @@ public class ReactionActivity extends AppCompatActivity {
 
     private void changeButtonToHitByUser() {
         Button reactionButton = (Button)findViewById(R.id.button4);
-        reactionButton.setBackgroundColor(Color.RED);
+        reactionButton.setText("GO!");
+        reactionButton.setBackgroundColor(Color.GREEN);
     }
 
     private void changeButtontToWaitingForUser(){
         Button reactionButton = (Button)findViewById(R.id.button4);
-        reactionButton.setBackgroundColor(Color.GREEN);
+        reactionButton.setText("WAIT...");
+        reactionButton.setBackgroundColor(Color.RED);
     }
 
     private void changeButtonToNotTiming(){
         Button reactionButton = (Button)findViewById(R.id.button4);
+        reactionButton.setText("START!");
         reactionButton.setBackgroundColor(Color.LTGRAY);
     }
 
