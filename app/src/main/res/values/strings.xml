@@ -1,18 +1,18 @@
 <resources>
-    <string name="app_name">AndroidBuzzer</string>
+    <string name="app_name">edcarter-reflex</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="reaction_tester_button_text">REACTION MODE</string>
     <string name="gameshow_mode_button_text">GAME SHOW MODE</string>
     <string name="statistics_button_text">STATISTICS</string>
-    <string name="title_activity_reaction">ReactionActivity</string>
-    <string name="title_activity_game_show">GameShowActivity</string>
-    <string name="title_activity_statistics">StatisticsActivity</string>
+    <string name="title_activity_reaction">Reaction Mode</string>
+    <string name="title_activity_game_show">Game Show Mode</string>
+    <string name="title_activity_statistics">Statistics</string>
     <string name="reaction_button_stopped_text">START!</string>
     <string name="reaction_rules_dialog_message">Hit The Grey Button To Start!\nWait For The Screen To Turn From Red To Green Then Hit The Button!</string>
     <string name="reaction_rules_dialog_title">Instructions</string>
     <string name="reaction_rules_dialog_ok_button">OK!</string>
-    <string name="title_activity_player_selection">PlayerSelectionActivity</string>
+    <string name="title_activity_player_selection">Player Selection</string>
     <string name="select_player_text">Select Number Of Players!</string>
     <string name="player_selector_play_button">Play!</string>
     <string name="clear_stats_button_text">Clear Stats</string>
