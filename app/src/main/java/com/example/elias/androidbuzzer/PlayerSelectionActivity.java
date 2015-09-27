@@ -21,7 +21,7 @@ public class PlayerSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_selection);
-        Integer maxPlayers = 6;
+        Integer maxPlayers = 4;
         setupSeekBar(maxPlayers);
         setupPlayersTextView();
     }
