@@ -33,7 +33,8 @@
             android:layout_height="match_parent"
             android:text="@string/clear_stats_button_text"
             android:id="@+id/clear_stats_button"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"
+            android:onClick="clear_statistics"/>
     </LinearLayout>
 
 </LinearLayout>

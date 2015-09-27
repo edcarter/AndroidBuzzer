@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
@@ -29,10 +30,10 @@ public class StatisticsActivity extends AppCompatActivity {
         statistics.addAll(formatTwoPlayerStats(model));
         statistics.addAll(formatThreePlayerStats(model));
         statistics.addAll(formatFourPlayerStats(model));
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, statistics);
+        ArrayAdapter<String> statisticsArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, statistics);
 
         //http://blog.denevell.org/android-SimpleExpandableListAdapter-example.html
-        listView.setAdapter(arrayAdapter);
+        listView.setAdapter(statisticsArrayAdapter);
     }
 
 
@@ -49,6 +50,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private ArrayList<String> getMinimumReactionTimes(StatisticsModel model){
         ArrayList<String> formattedStats = new ArrayList<>();
         Stack<Integer> reactionTimes = model.singlePlayerReactionTimesMs;
+        if (reactionTimes.size() == 0) return new ArrayList<>();
         Integer minimumReactionTime = reactionTimes.peek();
         for (int i = 0; i < reactionTimes.size(); i++){
             if (reactionTimes.elementAt(i) < minimumReactionTime) minimumReactionTime = reactionTimes.elementAt(i);
@@ -72,6 +74,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private ArrayList<String> getMaximumReactionTimes(StatisticsModel model){
         ArrayList<String> formattedStats = new ArrayList<>();
         Stack<Integer> reactionTimes = model.singlePlayerReactionTimesMs;
+        if (reactionTimes.size() == 0) return new ArrayList<>();
         Integer maximumReactionTime = reactionTimes.peek();
         for (int i = 0; i < reactionTimes.size(); i++){
             if (reactionTimes.elementAt(i) > maximumReactionTime) maximumReactionTime = reactionTimes.elementAt(i);
@@ -95,6 +98,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private ArrayList<String> getAverageReactionTimes(StatisticsModel model){
         ArrayList<String> formattedStats = new ArrayList<>();
         Stack<Integer> reactionTimes = model.singlePlayerReactionTimesMs;
+        if (reactionTimes.size() == 0) return new ArrayList<>();
         Integer accumulator = 0;
         for (int i = 0; i < reactionTimes.size(); i++){
             accumulator += reactionTimes.elementAt(i);
@@ -119,6 +123,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private ArrayList<String> getMedianReactionTimes(StatisticsModel model){
         ArrayList<String> formattedStats = new ArrayList<>();
         Stack<Integer> reactionTimes = model.singlePlayerReactionTimesMs;
+        if (reactionTimes.size() == 0) return new ArrayList<>();
         ArrayList<Integer> reactionTimesList = new ArrayList<>(reactionTimes);
         Collections.sort(reactionTimesList);
         for (int i = 0; i < reactionTimes.size(); i++){
@@ -142,6 +147,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private ArrayList<String> formatTwoPlayerStats(StatisticsModel model) {
         Stack<Integer> firstPlayerReaction = model.twoPlayerFirstBuzzer;
+        if (firstPlayerReaction.size() == 0) return new ArrayList<>();
         Integer playerOneReactedFirst = 0;
         Integer playerTwoReactedFirst = 0;
         for (Integer firstPlayer : firstPlayerReaction) {
@@ -158,7 +164,8 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     private ArrayList<String> formatThreePlayerStats(StatisticsModel model) {
-        Stack<Integer> firstPlayerReaction = model.twoPlayerFirstBuzzer;
+        Stack<Integer> firstPlayerReaction = model.threePlayerFirstBuzzer;
+        if (firstPlayerReaction.size() == 0) return new ArrayList<>();
         Integer playerOneReactedFirst = 0;
         Integer playerTwoReactedFirst = 0;
         Integer playerThreeReactedFirst = 0;
@@ -179,7 +186,8 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     private ArrayList<String> formatFourPlayerStats(StatisticsModel model) {
-        Stack<Integer> firstPlayerReaction = model.twoPlayerFirstBuzzer;
+        Stack<Integer> firstPlayerReaction = model.fourPlayerFirstBuzzer;
+        if (firstPlayerReaction.size() == 0) return new ArrayList<>();
         Integer playerOneReactedFirst = 0;
         Integer playerTwoReactedFirst = 0;
         Integer playerThreeReactedFirst = 0;
@@ -223,5 +231,10 @@ public class StatisticsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void clear_statistics(View view) {
+        StatisticsEngine.ClearStatisticsModel(this);
+        populateListView(StatisticsEngine.GetStatisticsModel(this));
     }
 }
