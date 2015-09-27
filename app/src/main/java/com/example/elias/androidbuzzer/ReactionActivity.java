@@ -64,6 +64,7 @@ public class ReactionActivity extends AppCompatActivity {
             hitMarkerPlayer.start();
             Integer reactionTime = stopReactionTimer();
             changeButtonToNotTiming();
+            StatisticsEngine.AddReactionStatistic(reactionTime, this);
             displayReactionTime(reactionTime);
         } else if (timerRunning) {
             //user hit too early

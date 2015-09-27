@@ -58,6 +58,7 @@ public class GameShowActivity extends AppCompatActivity {
         Button button = (Button) v;
         Integer playerNumber = (Integer) v.getTag();
         displayWinningPlayer(playerNumber);
+        StatisticsEngine.AddBuzzerStatistic(playersSelected, playerNumber, this);
     }
 
     private void displayWinningPlayer(Integer i) {

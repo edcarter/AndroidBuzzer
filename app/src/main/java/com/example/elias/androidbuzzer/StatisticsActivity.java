@@ -7,10 +7,13 @@ import android.view.MenuItem;
 
 public class StatisticsActivity extends AppCompatActivity {
 
+    private StatisticsModel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+        model = StatisticsEngine.GetStatisticsModel(this);
     }
 
     @Override

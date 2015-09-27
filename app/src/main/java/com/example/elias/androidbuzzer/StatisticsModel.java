@@ -1,14 +1,23 @@
 package com.example.elias.androidbuzzer;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Created by elias on 26/09/15.
  */
 public class StatisticsModel {
-    public ArrayList<PlayersData> singlePlayerReactionTimesMs;
-    public ArrayList<PlayersData> twoPlayerReactionTimesMs;
-    public ArrayList<PlayersData> threePlayerReactionTimesMs;
-    public ArrayList<PlayersData> fourPlayerReactionTimesMs;
+
+    public StatisticsModel(){
+        singlePlayerReactionTimesMs = new Stack<>();
+        twoPlayerFirstBuzzer = new Stack<>();
+        threePlayerFirstBuzzer = new Stack<>();
+        fourPlayerFirstBuzzer = new Stack<>();
+    }
+
+    //TODO(revamp model? what if you could have more than 4 players?)
+    public Stack<Integer> singlePlayerReactionTimesMs;
+    public Stack<Integer> twoPlayerFirstBuzzer;
+    public Stack<Integer> threePlayerFirstBuzzer;
+    public Stack<Integer> fourPlayerFirstBuzzer;
 }
 
