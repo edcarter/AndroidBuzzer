@@ -17,4 +17,5 @@
     <string name="player_selector_play_button">Play!</string>
     <string name="clear_stats_button_text">Clear Stats</string>
     <string name="email_stats_button_text">Email Stats</string>
+    <string name="main_menu_image_desc">MainMenuImage</string>
 </resources>
