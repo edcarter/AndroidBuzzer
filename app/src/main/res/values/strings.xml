@@ -15,4 +15,6 @@
     <string name="title_activity_player_selection">PlayerSelectionActivity</string>
     <string name="select_player_text">Select Number Of Players!</string>
     <string name="player_selector_play_button">Play!</string>
+    <string name="clear_stats_button_text">Clear Stats</string>
+    <string name="email_stats_button_text">Email Stats</string>
 </resources>
