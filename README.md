@@ -9,6 +9,11 @@ UML Location: /AndroidBuzzer/doc/Asst1UML.jpeg
 
 Source Code Location: /AndroidBuzzer/src
 
+External Sources: 
+1.) kcoppock, http://stackoverflow.com/questions/4641072/how-to-set-layout-weight-attribute-dynamically-from-code
+2.) Rawkode, http://stackoverflow.com/questions/13746940/android-calling-ui-thread-from-worker-thread
+
+
 Copyright 2015 Elias Carter
 
 Licensed under the Apache License, Version 2.0 (the "License");
