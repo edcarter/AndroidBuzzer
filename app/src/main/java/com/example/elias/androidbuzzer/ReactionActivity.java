@@ -40,12 +40,10 @@ public class ReactionActivity extends AppCompatActivity {
     private ReactionTimer reactionTimer;
     private Boolean timerRunning = false;
     private Boolean waitingForUserReaction = false;
-    //MediaPlayer hitMarkerPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //hitMarkerPlayer = MediaPlayer.create(this, R.raw.hitmarker);
         setContentView(R.layout.activity_reaction);
         notifyRules();
         reactionTimer = new ReactionTimer();
@@ -75,8 +73,6 @@ public class ReactionActivity extends AppCompatActivity {
     public void reactionButtonClicked(View view) throws Exception {
         //TODO(refactor button click handler for different states)
         if (timerRunning && waitingForUserReaction){
-
-            //hitMarkerPlayer.start();
             Integer reactionTime = stopReactionTimer();
             changeButtonToNotTiming();
             StatisticsEngine.AddReactionStatistic(reactionTime, this);
