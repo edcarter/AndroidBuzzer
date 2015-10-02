@@ -2,7 +2,10 @@
 Andorid Buzzer / Gameshow Timer
 Elias Carter
 
-Video Demonstration: [url here]
+Video Demonstration: /AndroidBuzzer/doc/AndroidBuzzerDemo.avi
+note: video capture software caused some artifacts in the android emulator
+
+UML Location: /AndroidBuzzer/doc/Asst1UML.jpeg
 
 Copyright 2015 Elias Carter
 
