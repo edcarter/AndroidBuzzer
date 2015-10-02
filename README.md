@@ -7,6 +7,8 @@ note: video capture software caused some artifacts in the android emulator
 
 UML Location: /AndroidBuzzer/doc/Asst1UML.jpeg
 
+Source Code Location: /AndroidBuzzer/src
+
 Copyright 2015 Elias Carter
 
 Licensed under the Apache License, Version 2.0 (the "License");
