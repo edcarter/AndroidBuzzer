@@ -74,6 +74,10 @@ public class GameShowActivity extends AppCompatActivity {
         Button button = (Button) v;
         Integer playerNumber = (Integer) v.getTag();
         displayWinningPlayer(playerNumber);
+        saveFirstBuzzer(playerNumber);
+    }
+
+    private void saveFirstBuzzer(Integer playerNumber){
         StatisticsEngine.AddBuzzerStatistic(playersSelected, playerNumber, this);
     }
 
